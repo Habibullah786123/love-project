@@ -11,35 +11,35 @@ window.addEventListener('load', () => {
     }, 3000);
 });
 
-// Smooth Scrolling and Navigation
-let currentSection = 0;
-let autoAdvanceTimer;
-let isScrolling = false;
+// // Smooth Scrolling and Navigation
+// let currentSection = 0;
+// let autoAdvanceTimer;
+// let isScrolling = false;
 
-function scrollToSection(index) {
-    if (index < 0 || index >= sections.length || isScrolling) return;
+// function scrollToSection(index) {
+//     if (index < 0 || index >= sections.length || isScrolling) return;
 
-    isScrolling = true;
-    currentSection = index;
+//     isScrolling = true;
+//     currentSection = index;
 
-    sections[index].scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-    });
+//     sections[index].scrollIntoView({
+//         behavior: 'smooth',
+//         block: 'start'
+//     });
 
-    updateDots();
+//     updateDots();
 
-    setTimeout(() => {
-        isScrolling = false;
-        resetAutoAdvance();
-    }, 1000);
-}
+//     setTimeout(() => {
+//         isScrolling = false;
+//         resetAutoAdvance();
+//     }, 1000);
+// }
 
-function updateDots() {
-    dots.forEach((dot, index) => {
-        dot.classList.toggle('active', index === currentSection);
-    });
-}
+// function updateDots() {
+//     dots.forEach((dot, index) => {
+//         dot.classList.toggle('active', index === currentSection);
+//     });
+// }
 
 function resetAutoAdvance() {
     clearTimeout(autoAdvanceTimer);
@@ -239,4 +239,5 @@ let musicPlaying = false;
 function toggleMusic() {
     musicPlaying = !musicPlaying;
     // Add music implementation here if needed
+
 }
