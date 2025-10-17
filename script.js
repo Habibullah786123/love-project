@@ -11,42 +11,26 @@ window.addEventListener('load', () => {
     }, 3000);
 });
 
-// // Smooth Scrolling and Navigation
-// let currentSection = 0;
-// let autoAdvanceTimer;
-// let isScrolling = false;
+// Smooth Scrolling and Navigation
+let currentSection = 0;
 
-// function scrollToSection(index) {
-//     if (index < 0 || index >= sections.length || isScrolling) return;
+function scrollToSection(index) {
+    if (index < 0 || index >= sections.length) return;
 
-//     isScrolling = true;
-//     currentSection = index;
+    currentSection = index;
 
-//     sections[index].scrollIntoView({
-//         behavior: 'smooth',
-//         block: 'start'
-//     });
+    sections[index].scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+    });
 
-//     updateDots();
+    updateDots();
+}
 
-//     setTimeout(() => {
-//         isScrolling = false;
-//         resetAutoAdvance();
-//     }, 1000);
-// }
-
-// function updateDots() {
-//     dots.forEach((dot, index) => {
-//         dot.classList.toggle('active', index === currentSection);
-//     });
-// }
-
-function resetAutoAdvance() {
-    clearTimeout(autoAdvanceTimer);
-    autoAdvanceTimer = setTimeout(() => {
-        const nextSection = (currentSection + 1) % sections.length;
-        scrollToSection(nextSection);
-    }, 15000);
+function updateDots() {
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSection);
+    });
 }
 
 // Dot Navigation
@@ -55,6 +39,9 @@ dots.forEach((dot, index) => {
         scrollToSection(index);
     });
 });
+
+// Initialize dots
+updateDots();
 
 // Scroll Detection
 let scrollTimeout;
@@ -71,40 +58,12 @@ window.addEventListener('scroll', () => {
                 if (currentSection !== index) {
                     currentSection = index;
                     updateDots();
-                    resetAutoAdvance();
                 }
             }
         });
     }, 100);
 });
 
-// Touch/Swipe Support
-let touchStartY = 0;
-let touchEndY = 0;
-
-document.addEventListener('touchstart', (e) => {
-    touchStartY = e.changedTouches[0].screenY;
-});
-
-document.addEventListener('touchend', (e) => {
-    touchEndY = e.changedTouches[0].screenY;
-    handleSwipe();
-});
-
-function handleSwipe() {
-    const swipeThreshold = 50;
-    const swipeDistance = touchStartY - touchEndY;
-
-    if (Math.abs(swipeDistance) > swipeThreshold) {
-        if (swipeDistance > 0) {
-            // Swipe up - next section
-            scrollToSection(currentSection + 1);
-        } else {
-            // Swipe down - previous section
-            scrollToSection(currentSection - 1);
-        }
-    }
-}
 
 // Lightbox Functionality
 const lightbox = document.createElement('div');
@@ -139,15 +98,6 @@ lightbox.addEventListener('click', (e) => {
 // Keyboard Navigation
 document.addEventListener('keydown', (e) => {
     switch(e.key) {
-        case 'ArrowDown':
-        case ' ':
-            e.preventDefault();
-            scrollToSection(currentSection + 1);
-            break;
-        case 'ArrowUp':
-            e.preventDefault();
-            scrollToSection(currentSection - 1);
-            break;
         case 'Escape':
             if (lightbox.classList.contains('active')) {
                 lightbox.classList.remove('active');
@@ -209,7 +159,6 @@ if ('IntersectionObserver' in window) {
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     updateDots();
-    resetAutoAdvance();
 
     // Add CSS for animate-in class
     const style = document.createElement('style');
@@ -239,5 +188,4 @@ let musicPlaying = false;
 function toggleMusic() {
     musicPlaying = !musicPlaying;
     // Add music implementation here if needed
-
 }
