@@ -185,18 +185,21 @@ body {
 .heart1 {
     top: 20%;
     left: 10%;
+    color: red;
     animation-delay: 0s;
 }
 
 .heart2 {
     top: 60%;
     right: 15%;
+    color: red;
     animation-delay: 2s;
 }
 
 .heart3 {
     bottom: 20%;
     left: 20%;
+    color: red;
     animation-delay: 4s;
 }
 
@@ -700,3 +703,4 @@ body {
         max-height: 95%;
     }
 }
+
